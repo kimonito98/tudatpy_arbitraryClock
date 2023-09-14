@@ -8,6 +8,9 @@
  *    http://tudat.tudelft.nl/LICENSE.
  */
 
+#include "kernel/expose_astro/expose_timing_system.h"
+
+
 #include "expose_environment.h"
 #include <tudat/basics/deprecationWarnings.h>
 
@@ -241,7 +244,10 @@ void expose_environment(py::module &m) {
                  py::arg("deflection_angle"))
             .def("get_engine_model",
                  &tsm::VehicleSystems::getEngineModel,
-                 py::arg("engine_name"));
+                 py::arg("engine_name"))
+            .def("set_timing_system",
+                 &tsm::VehicleSystems::setTimingSystem,
+                 py::arg("timing_system"));
 
     py::class_<tsm::EngineModel,
             std::shared_ptr<tsm::EngineModel>>(m, "EngineModel" )
@@ -588,7 +594,8 @@ void expose_environment(py::module &m) {
     py::class_<tgs::GroundStation,
             std::shared_ptr<tgs::GroundStation>>(m, "GroundStation")
             .def_property_readonly("pointing_angles_calculator", &tgs::GroundStation::getPointingAnglesCalculator )
-            .def_property_readonly("station_state", &tgs::GroundStation::getNominalStationState );
+            .def_property_readonly("station_state", &tgs::GroundStation::getNominalStationState )
+            .def("set_timing_system", &tgs::GroundStation::setTimingSystem, py::arg("timing_system"));
 
 
     py::class_<tgs::PointingAnglesCalculator,
@@ -639,7 +646,8 @@ void expose_environment(py::module &m) {
             .def_property("system_models", &tss::Body::getVehicleSystems, &tss::Body::setVehicleSystems)
             .def_property_readonly("gravitational_parameter", &tss::Body::getGravitationalParameter, get_docstring("Body.gravitational_parameter").c_str())
             .def("get_ground_station", &tss::Body::getGroundStation, py::arg("station_name"))
-            .def_property_readonly("ground_station_list", &tss::Body::getGroundStationMap );
+            .def_property_readonly("ground_station_list", &tss::Body::getGroundStationMap )
+            .def("set_vehicle_system", &tss::Body::setVehicleSystems, py::arg("vehicle_system"));
 
 
 

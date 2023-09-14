@@ -485,6 +485,13 @@ void expose_estimation(py::module &m) {
                   &tss::CovarianceAnalysisInput<double, TIME_TYPE>::setConstantPerObservableWeightsMatrix,
                   py::arg( "weight_per_observable" ),
                   get_docstring("CovarianceAnalysisInput.set_constant_weight_per_observable").c_str() )
+            /*
+                  .def( "set_constant_weight_per_observable_and_link_ends",
+                  &tss::CovarianceAnalysisInput<double, TIME_TYPE>::setConstantPerObservableAndLinkEndsWeights,
+                  py::arg( "observable_type" ),
+                  py::arg( "weight_per_observable_and_link_ends" ),
+                  get_docstring("CovarianceAnalysisInput.set_constant_weight_per_observable_and_link_ends").c_str() )
+                  */
             .def( "define_covariance_settings",
                   &tss::CovarianceAnalysisInput<double, TIME_TYPE>::defineCovarianceSettings,
                   py::arg( "reintegrate_equations_on_first_iteration" ) = true,

@@ -165,6 +165,10 @@ void expose_observation_setup(py::module &m) {
             .value("reflector3", tom::LinkEndType::reflector3 )
             .value("reflector4", tom::LinkEndType::reflector4 )
             .value("receiver", tom::LinkEndType::receiver )
+
+            // Michael
+            .value("transmitter2", tom::LinkEndType::transmitter2 )
+
             .value("observed_body", tom::LinkEndType::observed_body )
             .export_values();
 
@@ -233,7 +237,9 @@ void expose_observation_setup(py::module &m) {
             .value("one_way_range_type", tom::ObservableType::one_way_range )
             .value("n_way_range_type", tom::ObservableType::n_way_range )
             .value("angular_position_type", tom::ObservableType::angular_position )
-            .value("relative_angular_position_type", tom::ObservableType::angular_position )
+            // Michael
+            //.value("relative_angular_position_type", tom::ObservableType::angular_position )
+            .value("relative_angular_position_type", tom::ObservableType::relative_angular_position )
             .value("position_observable_type", tom::ObservableType::position_observable )
             .value("velocity_observable_type", tom::ObservableType::velocity_observable )
             .value("one_way_instantaneous_doppler_type", tom::ObservableType::one_way_doppler )
@@ -460,6 +466,12 @@ void expose_observation_setup(py::module &m) {
             std::shared_ptr<tom::ObservationBiasSettings>>(
                 m, "ObservationBiasSettings",
                 get_docstring("ObservationBiasSettings").c_str() );
+
+    m.def("clock_induced_bias",
+          &tom::clockInducedBias,
+          py::arg("body_name"),
+          py::arg("station_name"),
+          get_docstring("clock_induced_bias").c_str() );
 
     m.def("absolute_bias",
           &tom::constantAbsoluteBias,
