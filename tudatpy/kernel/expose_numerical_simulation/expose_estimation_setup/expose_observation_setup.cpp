@@ -14,6 +14,7 @@
 #include "tudat/simulation/estimation_setup/createObservationModel.h"
 #include "tudat/simulation/estimation_setup/observationSimulationSettings.h"
 
+
 #include "tudatpy/docstrings.h"
 #include "tudatpy/scalarTypes.h"
 
@@ -168,7 +169,6 @@ void expose_observation_setup(py::module &m) {
 
             // Michael
             .value("transmitter2", tom::LinkEndType::transmitter2 )
-
             .value("observed_body", tom::LinkEndType::observed_body )
             .export_values();
 
@@ -192,6 +192,19 @@ void expose_observation_setup(py::module &m) {
           get_docstring("get_default_reference_link_end").c_str() );
 
     // ###########      Observation Model Settings        ################
+
+    //py::class_<tom::ObservationModelCreator<1, double, double>,
+    //        std::shared_ptr< tom::ObservationModelCreator< 1, double, double > > >(
+    //        m, "ObservationModelCreator",
+    //        get_docstring("ObservationModelCreator").c_str() );
+
+    //m.def("create_observation_model",
+    //     &tom::ObservationModelCreator<1, double, double>::createObservationModel,
+    //     py::arg("one"),
+    //     py::arg("two"),
+    //     get_docstring("body_origin_link_end_id").c_str() );
+
+
 
 
     py::class_<tom::LinkEndId,

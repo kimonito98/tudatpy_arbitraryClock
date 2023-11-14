@@ -302,6 +302,9 @@ void expose_numerical_simulation(py::module &m) {
             .def("perform_estimation",
                  &tss::OrbitDeterminationManager<double, TIME_TYPE>::estimateParameters,
                  py::arg( "estimation_input" ),
+                 py::arg( "design_matrix_entries_to_set_to_zero" ),
+                 py::arg( "design_matrix_entries_to_set_to_zero_for_state_contribution" ),
+                 py::arg( "number_of_bodies_to_estimate" ),
                  get_docstring("Estimator.perform_estimation").c_str() )
             .def("compute_covariance",
                  &tss::OrbitDeterminationManager<double, TIME_TYPE>::computeCovariance,
